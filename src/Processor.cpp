@@ -37,6 +37,8 @@ Processor::Processor(int width, int height)
 
 void Processor::run(Effect * effect)
 {
+  GL_ASSERT( glClearColor(0.0, 0.0, 0.0, 0.0) );
+  GL_ASSERT( glClear(GL_COLOR_BUFFER_BIT) );
   effect->bind();
   GL_ASSERT( glBindBuffer(GL_ELEMENT_ARRAY_BUFFER, 0) );
   GL_ASSERT( glDrawArrays(_screenQuad->getPrimitiveType(), 0, _screenQuad->getVertexCount()) );

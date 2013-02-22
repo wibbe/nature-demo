@@ -110,12 +110,23 @@ gameplay::Mesh * createHexMesh(int resolutionX, int resolutionY, float width, fl
 
 Terrain::Terrain(int resolutionX, int resolutionY)
 {
+  using namespace gameplay;
+
   _heights = new Processor(resolutionX, resolutionY);
   _normals = new Processor(resolutionX, resolutionY);
   _occlusions = new Processor(resolutionX, resolutionY);
 
   _hexGrid = gameplay::Model::create(createHexMesh(resolutionX, resolutionY, 1.0f, 1.0f));
-  gameplay::Material * material = _hexGrid->setMaterial("res/terrain.material");
+  Material * material = _hexGrid->setMaterial("res/terrain.material");
+  material->getParameter("u_heights")->setValue(Texture::Sampler::create(_heights->result()));
+
+  Effect * simplex = Effect::createFromFile("res/pass-through.vert", "res/simplex.frag");
+  simplex->setValue(simplex->getUniform("u_viewport"), Vector2(resolutionX, resolutionY));
+  //simplex->setValue(simplex->getUniform("u_delta"), 223.0f);
+  simplex->setValue(simplex->getUniform("u_delta"), 22.0f);
+  _heights->run(simplex);
+
+  SAFE_RELEASE(simplex);
 }
 
 void Terrain::update()

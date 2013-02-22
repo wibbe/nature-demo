@@ -3,7 +3,7 @@ precision highp float;
 #endif
 
 // Uniforms
-uniform vec4 u_diffuseColor;                  // Diffuse color
+uniform vec4 u_diffuseColor;
 
 // Inputs
 varying vec3 v_barycentric;
