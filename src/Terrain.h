@@ -5,6 +5,8 @@
 
 namespace gameplay {
   class Model;
+  class VertexAttributeBinding;
+  class Pass;
 }
 
 class Terrain
@@ -22,6 +24,8 @@ class Terrain
     Processor * _normals;
     Processor * _occlusions;
 
-    gameplay::Effect * _heightsEffect;
+    gameplay::Pass * _generateHeightmap;
+    gameplay::Pass * _calculateNormals;
+
     gameplay::Model * _hexGrid;
 };

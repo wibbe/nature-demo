@@ -1,6 +1,7 @@
 
-uniform vec2 u_viewport;
 uniform float u_delta;
+
+varying vec2 v_pos;
 
 //
 // Description : Array and textureless GLSL 2D/3D/4D simplex
@@ -97,7 +98,7 @@ float snoise(vec3 v)
 void main()
 {
   float h = 0.0;
-  vec2 uv = gl_FragCoord.xy / u_viewport;
+  vec2 uv = v_pos;
 
   for (int i = 0; i < 10; i++)
   {

@@ -1,0 +1,31 @@
+material simulation
+{
+  technique generator
+  {
+    pass simplex
+    {
+      vertexShader = res/pass-through.vert
+      fragmentShader = res/simplex.frag
+
+      u_delta = 120.0
+    }
+  }
+
+  technique terrain
+  {
+    pass calculate-normals
+    {
+      vertexShader = res/pass-through.vert
+      fragmentShader = res/normals.frag
+    }
+  }
+
+  //technique water
+  //{
+  //  pass displace
+  //  {
+  //
+  //  }
+  //}
+
+}

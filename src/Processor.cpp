@@ -7,6 +7,9 @@
 #include "Texture.h"
 #include "Mesh.h"
 #include "Effect.h"
+#include "Pass.h"
+#include "Material.h"
+#include "VertexAttributeBinding.h"
 
 using namespace gameplay;
 
@@ -35,11 +38,33 @@ Processor::Processor(int width, int height)
     _screenQuad = Mesh::createQuadFullscreen();
 }
 
-void Processor::run(Effect * effect)
+void Processor::run(Pass * pass)
 {
-  GL_ASSERT( glClearColor(0.0, 0.0, 0.0, 0.0) );
+  _fbo->bind();
+  pass->bind();
+
+  GL_ASSERT( glViewport(0, 0, _fbo->getWidth(), _fbo->getHeight()) );
+
+  GL_ASSERT( glClearColor(0.0, 0.0, 0.0, 1.0) );
   GL_ASSERT( glClear(GL_COLOR_BUFFER_BIT) );
-  effect->bind();
+
   GL_ASSERT( glBindBuffer(GL_ELEMENT_ARRAY_BUFFER, 0) );
   GL_ASSERT( glDrawArrays(_screenQuad->getPrimitiveType(), 0, _screenQuad->getVertexCount()) );
+
+  pass->unbind();
+  FrameBuffer::bindDefault();
+}
+
+Pass * Processor::getPass(Material * material, const char * techniqueName, const char * passName)
+{
+  Pass * pass = material->getTechnique(techniqueName)->getPass(passName);
+  pass->setVertexAttributeBinding(VertexAttributeBinding::create(Processor::screenMesh(), pass->getEffect()));
+
+  RenderState::StateBlock * state = pass->getStateBlock();
+  state->setDepthTest(false);
+  state->setDepthWrite(false);
+  state->setBlend(false);
+  state->setCullFace(false);
+
+  return pass;
 }

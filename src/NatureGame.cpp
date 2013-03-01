@@ -19,10 +19,8 @@ void NatureGame::initialize()
   _scene = bundle->loadScene();
   SAFE_RELEASE(bundle);
 
-  _camera = gameplay::Camera::createPerspective(60, (float)getWidth() / (float)getHeight(), 1.0, 1000.0);
+  _camera = gameplay::Camera::createPerspective(60, (float)getWidth() / (float)getHeight(), 0.1, 1000.0);
 
-  // Set the aspect ratio for the scene's camera to match the current resolution
-  //_scene->getActiveCamera()->setAspectRatio((float)getWidth() / (float)getHeight());
   _cameraNode = _scene->addNode("camera");
   _cameraNode->setTranslation(gameplay::Vector3(0, 5, 10));
   _cameraPitch = gameplay::Node::create("pitch");
@@ -75,6 +73,9 @@ void NatureGame::update(float elapsedTime)
 
 void NatureGame::render(float elapsedTime)
 {
+  setViewport(getViewport());
+  GL_ASSERT( glClearColor(0.2, 0.4, 0.9, 1.0) );
+
   // Clear the color and depth buffers
   clear(CLEAR_COLOR_DEPTH, gameplay::Vector4::zero(), 1.0f, 0);
 

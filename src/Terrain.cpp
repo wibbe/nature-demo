@@ -118,19 +118,28 @@ Terrain::Terrain(int resolutionX, int resolutionY)
 
   _hexGrid = gameplay::Model::create(createHexMesh(resolutionX, resolutionY, 1.0f, 1.0f));
   Material * material = _hexGrid->setMaterial("res/terrain.material");
-  material->getParameter("u_heights")->setValue(Texture::Sampler::create(_heights->result()));
 
-  Effect * simplex = Effect::createFromFile("res/pass-through.vert", "res/simplex.frag");
-  simplex->setValue(simplex->getUniform("u_viewport"), Vector2(resolutionX, resolutionY));
-  //simplex->setValue(simplex->getUniform("u_delta"), 223.0f);
-  simplex->setValue(simplex->getUniform("u_delta"), 22.0f);
-  _heights->run(simplex);
+  Texture::Sampler * sampler = Texture::Sampler::create(_heights->result());
+  sampler->setWrapMode(Texture::CLAMP, Texture::CLAMP);
+  material->getTechnique("display")->getPass("display")->getParameter("heights")->setValue(sampler);
 
-  SAFE_RELEASE(simplex);
+  sampler = Texture::Sampler::create(_normals->result());
+  sampler->setWrapMode(Texture::CLAMP, Texture::CLAMP);
+  material->getTechnique("display")->getPass("display")->getParameter("normals")->setValue(sampler);
+
+  Material * simulation = Material::create("res/simulation.material");
+
+  _generateHeightmap = Processor::getPass(simulation, "generator", "simplex");
+  _calculateNormals = Processor::getPass(simulation, "terrain", "calculate-normals");
+  _calculateNormals->getParameter("pixelScale")->setValue(1.0f / resolutionX);
+  _calculateNormals->getParameter("heights")->setValue(Texture::Sampler::create(_heights->result()));
+
+  _heights->run(_generateHeightmap);
 }
 
 void Terrain::update()
 {
+  _normals->run(_calculateNormals);
 }
 
 void Terrain::draw()

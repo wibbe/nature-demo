@@ -4,17 +4,19 @@ attribute vec2 a_texCoord0;
 attribute vec3 a_texCoord1;
 
 // Uniforms
-uniform sampler2D u_heights;
-uniform mat4 u_worldViewProjectionMatrix;
-uniform float u_scale;
+uniform sampler2D heights;
+uniform mat4 worldViewProjectionMatrix;
+uniform float scale;
 
 // Outputs
 varying vec3 v_barycentric;
+varying vec2 v_texCoord;
 
 void main()
 {
-  float height = texture2D(u_heights, a_texCoord0).y;
+  float height = texture2D(heights, a_texCoord0).y;
 
-  gl_Position = u_worldViewProjectionMatrix * vec4(a_position.x * u_scale, clamp(height, 0.0, 5.0), a_position.y * u_scale, 1.0);
+  gl_Position = worldViewProjectionMatrix * vec4(a_position.x * scale, height * scale * 0.5, a_position.y * scale, 1.0);
   v_barycentric = a_texCoord1;
+  v_texCoord = a_texCoord0;
 }
