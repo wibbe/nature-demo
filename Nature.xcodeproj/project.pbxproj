@@ -44,7 +44,26 @@
 		5B61611614CCC24C0073B857 /* NatureGame.cpp in Sources */ = {isa = PBXBuildFile; fileRef = 42C932EF1491A5160098216A /* NatureGame.cpp */; };
 		5B61612614CCC24C0073B857 /* icon.png in Resources */ = {isa = PBXBuildFile; fileRef = 42C932ED1491A4CB0098216A /* icon.png */; };
 		5B61612714CCC24C0073B857 /* res in Resources */ = {isa = PBXBuildFile; fileRef = 42C932F21491A53E0098216A /* res */; };
+		D3B57FD916D7F6FD00DA4735 /* Processor.cpp in Sources */ = {isa = PBXBuildFile; fileRef = D3B57FD516D7F6FD00DA4735 /* Processor.cpp */; };
+		D3B57FDA16D7F6FD00DA4735 /* Terrain.cpp in Sources */ = {isa = PBXBuildFile; fileRef = D3B57FD716D7F6FD00DA4735 /* Terrain.cpp */; };
 /* End PBXBuildFile section */
+
+/* Begin PBXContainerItemProxy section */
+		D3B57FEE16D7F82900DA4735 /* PBXContainerItemProxy */ = {
+			isa = PBXContainerItemProxy;
+			containerPortal = D3B57FE616D7F82800DA4735 /* gameplay.xcodeproj */;
+			proxyType = 2;
+			remoteGlobalIDString = 4234D99A14686C52003031B3;
+			remoteInfo = "gameplay-macosx";
+		};
+		D3B57FF016D7F82900DA4735 /* PBXContainerItemProxy */ = {
+			isa = PBXContainerItemProxy;
+			containerPortal = D3B57FE616D7F82800DA4735 /* gameplay.xcodeproj */;
+			proxyType = 2;
+			remoteGlobalIDString = 5B04C5CA14BFCFE100EB0071;
+			remoteInfo = "gameplay-ios";
+		};
+/* End PBXContainerItemProxy section */
 
 /* Begin PBXFileReference section */
 		42049B5216ADBB61005DD1F9 /* CoreMotion.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = CoreMotion.framework; path = Platforms/iPhoneOS.platform/Developer/SDKs/iPhoneOS6.0.sdk/System/Library/Frameworks/CoreMotion.framework; sourceTree = DEVELOPER_DIR; };
@@ -86,8 +105,12 @@
 		5B61611214CCC2200073B857 /* Nature-macosx.plist */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = text.plist.xml; path = "Nature-macosx.plist"; sourceTree = "<group>"; };
 		5B61612C14CCC24C0073B857 /* Nature-ios.app */ = {isa = PBXFileReference; explicitFileType = wrapper.application; includeInIndex = 0; path = "Nature-ios.app"; sourceTree = BUILT_PRODUCTS_DIR; };
 		5B61612E14CCC24D0073B857 /* Nature-ios.plist */ = {isa = PBXFileReference; lastKnownFileType = text.plist.xml; path = "Nature-ios.plist"; sourceTree = "<group>"; };
-		5BC4E77F150F879E00CBE1C0 /* gameplay.xcodeproj */ = {isa = PBXFileReference; lastKnownFileType = "wrapper.pb-project"; name = gameplay.xcodeproj; path = ../GamePlay/gameplay/gameplay.xcodeproj; sourceTree = SOURCE_ROOT; };
-		5BC4E849150F911D00CBE1C0 /* shaders */ = {isa = PBXFileReference; lastKnownFileType = text; name = shaders; path = ../GamePlay/gameplay/res/shaders; sourceTree = SOURCE_ROOT; };
+		5BC4E849150F911D00CBE1C0 /* shaders */ = {isa = PBXFileReference; lastKnownFileType = folder; name = shaders; path = ../../libs/GamePlay/gameplay/res/shaders; sourceTree = SOURCE_ROOT; };
+		D3B57FD516D7F6FD00DA4735 /* Processor.cpp */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.cpp.cpp; path = Processor.cpp; sourceTree = "<group>"; };
+		D3B57FD616D7F6FD00DA4735 /* Processor.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = Processor.h; sourceTree = "<group>"; };
+		D3B57FD716D7F6FD00DA4735 /* Terrain.cpp */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.cpp.cpp; path = Terrain.cpp; sourceTree = "<group>"; };
+		D3B57FD816D7F6FD00DA4735 /* Terrain.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = Terrain.h; sourceTree = "<group>"; };
+		D3B57FE616D7F82800DA4735 /* gameplay.xcodeproj */ = {isa = PBXFileReference; lastKnownFileType = "wrapper.pb-project"; name = gameplay.xcodeproj; path = ../../libs/GamePlay/gameplay/gameplay.xcodeproj; sourceTree = "<group>"; };
 /* End PBXFileReference section */
 
 /* Begin PBXFrameworksBuildPhase section */
@@ -174,6 +197,10 @@
 		42C932C61491A0DB0098216A /* src */ = {
 			isa = PBXGroup;
 			children = (
+				D3B57FD516D7F6FD00DA4735 /* Processor.cpp */,
+				D3B57FD616D7F6FD00DA4735 /* Processor.h */,
+				D3B57FD716D7F6FD00DA4735 /* Terrain.cpp */,
+				D3B57FD816D7F6FD00DA4735 /* Terrain.h */,
 				42C932EF1491A5160098216A /* NatureGame.cpp */,
 				42C932F01491A5160098216A /* NatureGame.h */,
 			);
@@ -218,10 +245,19 @@
 		5BC4E825150F8CE600CBE1C0 /* GamePlay */ = {
 			isa = PBXGroup;
 			children = (
-				5BC4E77F150F879E00CBE1C0 /* gameplay.xcodeproj */,
+				D3B57FE616D7F82800DA4735 /* gameplay.xcodeproj */,
 				5BC4E849150F911D00CBE1C0 /* shaders */,
 			);
 			name = GamePlay;
+			sourceTree = "<group>";
+		};
+		D3B57FE716D7F82800DA4735 /* Products */ = {
+			isa = PBXGroup;
+			children = (
+				D3B57FEF16D7F82900DA4735 /* libgameplay.a */,
+				D3B57FF116D7F82900DA4735 /* libgameplay.a */,
+			);
+			name = Products;
 			sourceTree = "<group>";
 		};
 		F1F49B8516AD8C22008715A2 /* MacOSX */ = {
@@ -303,7 +339,7 @@
 			attributes = {
 				LastUpgradeCheck = 0450;
 			};
-			buildConfigurationList = 42C932B61491A0DB0098216A /* Build configuration list for PBXProject "gameplay-template" */;
+			buildConfigurationList = 42C932B61491A0DB0098216A /* Build configuration list for PBXProject "Nature" */;
 			compatibilityVersion = "Xcode 3.2";
 			developmentRegion = English;
 			hasScannedForEncodings = 0;
@@ -313,6 +349,12 @@
 			mainGroup = 42C932B11491A0DB0098216A;
 			productRefGroup = 42C932BD1491A0DB0098216A /* Products */;
 			projectDirPath = "";
+			projectReferences = (
+				{
+					ProductGroup = D3B57FE716D7F82800DA4735 /* Products */;
+					ProjectRef = D3B57FE616D7F82800DA4735 /* gameplay.xcodeproj */;
+				},
+			);
 			projectRoot = "";
 			targets = (
 				42C932BB1491A0DB0098216A /* Nature-macosx */,
@@ -320,6 +362,23 @@
 			);
 		};
 /* End PBXProject section */
+
+/* Begin PBXReferenceProxy section */
+		D3B57FEF16D7F82900DA4735 /* libgameplay.a */ = {
+			isa = PBXReferenceProxy;
+			fileType = archive.ar;
+			path = libgameplay.a;
+			remoteRef = D3B57FEE16D7F82900DA4735 /* PBXContainerItemProxy */;
+			sourceTree = BUILT_PRODUCTS_DIR;
+		};
+		D3B57FF116D7F82900DA4735 /* libgameplay.a */ = {
+			isa = PBXReferenceProxy;
+			fileType = archive.ar;
+			path = libgameplay.a;
+			remoteRef = D3B57FF016D7F82900DA4735 /* PBXContainerItemProxy */;
+			sourceTree = BUILT_PRODUCTS_DIR;
+		};
+/* End PBXReferenceProxy section */
 
 /* Begin PBXResourcesBuildPhase section */
 		42C932BA1491A0DB0098216A /* Resources */ = {
@@ -379,6 +438,8 @@
 			buildActionMask = 2147483647;
 			files = (
 				42C932F11491A5160098216A /* NatureGame.cpp in Sources */,
+				D3B57FD916D7F6FD00DA4735 /* Processor.cpp in Sources */,
+				D3B57FDA16D7F6FD00DA4735 /* Terrain.cpp in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
@@ -577,7 +638,7 @@
 /* End XCBuildConfiguration section */
 
 /* Begin XCConfigurationList section */
-		42C932B61491A0DB0098216A /* Build configuration list for PBXProject "gameplay-template" */ = {
+		42C932B61491A0DB0098216A /* Build configuration list for PBXProject "Nature" */ = {
 			isa = XCConfigurationList;
 			buildConfigurations = (
 				42C932D81491A0DB0098216A /* Debug */,
