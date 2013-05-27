@@ -40,7 +40,7 @@ Processor::Processor(int width, int height)
 
 void Processor::run(Pass * pass)
 {
-  _fbo->bind();
+  FrameBuffer * currentFbo = _fbo->bind();
   pass->bind();
 
   GL_ASSERT( glViewport(0, 0, _fbo->getWidth(), _fbo->getHeight()) );
@@ -52,7 +52,7 @@ void Processor::run(Pass * pass)
   GL_ASSERT( glDrawArrays(_screenQuad->getPrimitiveType(), 0, _screenQuad->getVertexCount()) );
 
   pass->unbind();
-  FrameBuffer::bindDefault();
+  currentFbo->bind();
 }
 
 Pass * Processor::getPass(Material * material, const char * techniqueName, const char * passName)

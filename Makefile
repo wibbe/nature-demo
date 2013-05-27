@@ -7,7 +7,7 @@ compile:
 	make -C build/
 
 run:
-	(cd bin/linux && ./Nature)
+	(cd build/bin/linux && ./Nature)
 
 debug:
-	(cd bin/linux && gdb Nature)
+	(cd build/bin/linux && gdb Nature)
