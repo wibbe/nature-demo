@@ -15,9 +15,11 @@ class Terrain
     Terrain(int resolutionX, int resolutionZ);
 
     void update();
-    void draw();
+    void draw(const char * technique);
 
     gameplay::Model * model() const { return _hexGrid; }
+
+    Processor * heights() const { return _heights; }
 
   private:
     Processor * _heights;

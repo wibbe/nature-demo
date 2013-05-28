@@ -14,6 +14,13 @@ NatureGame::NatureGame()
 
 void NatureGame::initialize()
 {
+  // Create the gbuffer
+  _gbuffer = new GBuffer(getWidth(), getHeight());
+  //_gbuffer = new GBuffer(1024, 512);
+
+  _albedoBatch = gameplay::SpriteBatch::create(_gbuffer->albedo());
+  _positionBatch = gameplay::SpriteBatch::create(_gbuffer->position());
+
   // Load game scene from file
   gameplay::Bundle * bundle = gameplay::Bundle::create("res/box.gpb");
   _scene = bundle->loadScene();
@@ -73,8 +80,30 @@ void NatureGame::update(float elapsedTime)
 
 void NatureGame::render(float elapsedTime)
 {
+  drawScene("display");
+
+  // Update gbuffer
+  gameplay::FrameBuffer * currentFbo = _gbuffer->bind();
+  drawScene("gbuffer");
+  currentFbo->bind();
+
+  // Draw sprite batches
+  const float width = _gbuffer->width() / 4.0f;
+  const float height = _gbuffer->height() / 4.0f;
+
+  _albedoBatch->start();
+  _albedoBatch->draw(getWidth() - width, getHeight() - height * 2, width, height, 0, 1, 1, 0, gameplay::Vector4::one());
+  _albedoBatch->finish();
+
+  _positionBatch->start();
+  _positionBatch->draw(getWidth() - width, getHeight() - height, width, height, 0, 1, 1, 0, gameplay::Vector4::one());
+  _positionBatch->finish();
+}
+
+void NatureGame::drawScene(const char * technique)
+{
   setViewport(getViewport());
-  GL_ASSERT( glClearColor(0.2, 0.4, 0.9, 1.0) );
+  GL_ASSERT(glClearColor(0.2, 0.4, 0.9, 1.0));
 
   // Clear the color and depth buffers
   clear(CLEAR_COLOR_DEPTH, gameplay::Vector4::zero(), 1.0f, 0);
@@ -82,10 +111,10 @@ void NatureGame::render(float elapsedTime)
   // Visit all the nodes in the scene for drawing
   //_scene->visit(this, &NatureGame::drawScene);
 
-  _terrain->draw();
+  _terrain->draw(technique);
 }
 
-bool NatureGame::drawScene(gameplay::Node* node)
+bool NatureGame::drawNode(gameplay::Node* node)
 {
   // If the node visited contains a model, draw it
   gameplay::Model* model = node->getModel();

@@ -4,6 +4,7 @@
 #include "gameplay.h"
 
 #include "Terrain.h"
+#include "GBuffer.h"
 
 /**
  * Main game class.
@@ -35,12 +36,8 @@ class NatureGame: public gameplay::Game
     void render(float elapsedTime);
 
   private:
-
-    /**
-     * Draws the scene each frame.
-     */
-    bool drawScene(gameplay::Node* node);
-
+    void drawScene(const char * technique);
+    bool drawNode(gameplay::Node* node);
 
   private:
     gameplay::Scene * _scene;
@@ -48,6 +45,10 @@ class NatureGame: public gameplay::Game
     gameplay::Node * _cameraNode;
     gameplay::Node * _cameraPitch;
 
+    gameplay::SpriteBatch * _albedoBatch;
+    gameplay::SpriteBatch * _positionBatch;
+
+    GBuffer * _gbuffer;
     Terrain * _terrain;
 
     struct Movement {

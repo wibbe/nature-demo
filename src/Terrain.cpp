@@ -122,10 +122,12 @@ Terrain::Terrain(int resolutionX, int resolutionY)
   Texture::Sampler * sampler = Texture::Sampler::create(_heights->result());
   sampler->setWrapMode(Texture::CLAMP, Texture::CLAMP);
   material->getTechnique("display")->getPass("display")->getParameter("heights")->setValue(sampler);
+  material->getTechnique("gbuffer")->getPass("gbuffer")->getParameter("heights")->setValue(sampler);
 
   sampler = Texture::Sampler::create(_normals->result());
   sampler->setWrapMode(Texture::CLAMP, Texture::CLAMP);
   material->getTechnique("display")->getPass("display")->getParameter("normals")->setValue(sampler);
+  material->getTechnique("gbuffer")->getPass("gbuffer")->getParameter("normals")->setValue(sampler);
 
   Material * simulation = Material::create("res/simulation.material");
 
@@ -142,7 +144,8 @@ void Terrain::update()
   _normals->run(_calculateNormals);
 }
 
-void Terrain::draw()
+void Terrain::draw(const char * technique)
 {
+  _hexGrid->getMaterial()->setTechnique(technique);
   _hexGrid->draw();
 }

@@ -134,6 +134,8 @@ set(GAME_SRC
     src/Processor.cpp
     src/Terrain.h
     src/Terrain.cpp
+    src/GBuffer.h
+    src/GBuffer.cpp
 )
 
 add_executable(${GAME_NAME}

@@ -13,7 +13,7 @@
 
 using namespace gameplay;
 
-static uint32_t createFloatTexture(int width, int height)
+uint32_t createFloatTexture(int width, int height)
 {
   uint32_t textureId;
   GL_ASSERT( glGenTextures(1, &textureId) );

@@ -65,4 +65,67 @@ material terrain
             }
         }
     }
+
+    technique gbuffer
+    {
+        pass gbuffer
+        {
+            // shaders
+            vertexShader = res/terrain_gbuffer.vert
+            fragmentShader = res/terrain_gbuffer.frag
+
+            // uniforms
+            worldViewProjectionMatrix = WORLD_VIEW_PROJECTION_MATRIX
+            worldViewMatrix = WORLD_VIEW_MATRIX
+            scale = 100.0
+            textureRepeat = 40.0
+
+            sampler texDirtDiffuse
+            {
+                path = res/textures/dirt-diffuse.png
+                mipmap = true
+                wrapS = REPEAT
+                wrapT = REPEAT
+                minFilter = NEAREST_MIPMAP_LINEAR
+                magFilter = LINEAR
+            }
+
+            sampler texDirtNormal
+            {
+                path = res/textures/dirt-normal.png
+                mipmap = true
+                wrapS = REPEAT
+                wrapT = REPEAT
+                minFilter = NEAREST_MIPMAP_LINEAR
+                magFilter = LINEAR
+            }
+
+            sampler texGrassDiffuse
+            {
+                path = res/textures/grass-diffuse.png
+                mipmap = true
+                wrapS = REPEAT
+                wrapT = REPEAT
+                minFilter = NEAREST_MIPMAP_LINEAR
+                magFilter = LINEAR
+            }
+
+            sampler texGrassNormal
+            {
+                path = res/textures/grass-normal.png
+                mipmap = true
+                wrapS = REPEAT
+                wrapT = REPEAT
+                minFilter = NEAREST_MIPMAP_LINEAR
+                magFilter = LINEAR
+            }
+
+            // render state
+            renderState
+            {
+                cullFace = false
+                depthTest = true
+            }
+        }
+    }
 }
