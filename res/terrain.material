@@ -75,8 +75,9 @@ material terrain
             fragmentShader = res/terrain_gbuffer.frag
 
             // uniforms
-            worldViewProjectionMatrix = WORLD_VIEW_PROJECTION_MATRIX
+            //worldViewProjectionMatrix = WORLD_VIEW_PROJECTION_MATRIX
             worldViewMatrix = WORLD_VIEW_MATRIX
+            projectionMatrix = PROJECTION_MATRIX
             scale = 100.0
             textureRepeat = 40.0
 

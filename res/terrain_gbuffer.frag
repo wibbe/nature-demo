@@ -11,6 +11,7 @@ uniform float textureRepeat;
 
 // Inputs
 varying vec2 v_texCoord;
+varying vec4 v_viewPosition;
 
 void main()
 {
@@ -31,5 +32,5 @@ void main()
   vec3 finalNormal = mix(dirtNormal, grassNormal, blend);
 
   gl_FragData[0] = vec4(finalColor, 1.0);
-  gl_FragData[1] = vec4(finalNormal, 1.0);
+  gl_FragData[1] = vec4(finalNormal, v_viewPosition.z);
 }
